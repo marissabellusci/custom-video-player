@@ -28,8 +28,10 @@ function skip(){
 }
 
 function handleRangeUpdate(){
-    console.log(this);
-}
+    video[this.name] = this.value;
+    console.log(this.name);
+    console.log(this.value);}
+   
 
 /*Hook up event listeners*/
 
@@ -38,23 +40,19 @@ function handleRangeUpdate(){
 
 video.addEventListener('click',togglePlay);
 toggle.addEventListener('click',togglePlay);
-document.body.onkeyup = function(e){
-    if (e.keyCode == '32');
-    togglePlay();
-}
+
+
 
 //below are two different ways to skip backwards/forwards:
     //click skip buttons or use L/R arrow keys
 
 skipButtons.forEach(button => button.addEventListener('click',skip));
-document.body.onkeyup = function(e){
-    if (e.keyCode == '39'){
-        console.log('25');
-    }   video.currentTime += 25;
-    if (e.keyCode == '37'){
-        console.log('-10');
-        video.currentTime -= 10;
-    }
-}
+
 
 ranges.forEach(slider => slider.addEventListener('change',handleRangeUpdate));
+ranges.forEach(slider => slider.addEventListener('mousedown', function() {
+    slider.addEventListener('mousemove', handleRangeUpdate);
+}
+)
+    
+)
