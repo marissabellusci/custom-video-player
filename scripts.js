@@ -38,6 +38,13 @@ function handleProgress(){
 
 }    
 
+function scrub(e){
+    console.log(e);
+    scrubPercent = e.offsetX / 640;
+    
+    video.currentTime = video.duration * scrubPercent;
+}
+
 /*Hook up event listeners*/
 
 //below are the three different ways to play and pause:
@@ -61,3 +68,8 @@ ranges.forEach(slider => slider.addEventListener('mousedown', function() {
 ))
 
 video.addEventListener('timeupdate',handleProgress);
+
+progress.addEventListener('click',scrub)
+progress.addEventListener('mousedown',function(){
+    progress.addEventListener('mousemove',scrub);
+})
