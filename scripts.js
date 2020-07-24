@@ -26,7 +26,7 @@ function togglePlay(){
 function skip(){
     console.log(this.dataset.skip);
     video.currentTime += parseFloat(this.dataset.skip);
-}
+};
 
 function handleRangeUpdate(){
     video[this.name] = this.value;
@@ -36,18 +36,24 @@ function handleRangeUpdate(){
 function handleProgress(){
     let percent = (video.currentTime / video.duration) * 100;
     progressBar.style.flexBasis = `${percent}%`;
-
-}    
-
-let isScrubbing = false;
+};    
 
 function scrub(e){
     console.log(e);
     scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
     video.currentTime = scrubTime;
+};
 
-
-}
+function expandWindow(){
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) { /* Firefox */
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { /* IE/Edge */
+        video.msRequestFullscreen();
+}};
 
 /*Hook up event listeners*/
 
@@ -84,8 +90,7 @@ progress.addEventListener('mousemove', (e) => {
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
 
-
-
+expand.addEventListener('click',expandWindow);
 
 
 
